@@ -11,6 +11,7 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import EastIcon from '@mui/icons-material/East';
 import { visuallyHidden } from '@mui/utils';
+import { useRouter } from 'next/navigation';
 
 interface Data {
   id: string;
@@ -168,6 +169,8 @@ export default function AreaTable({ data }: AreaTableProps) {
     [order, orderBy, page, rowsPerPage],
   );
 
+  const router = useRouter();
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper 
@@ -202,6 +205,7 @@ export default function AreaTable({ data }: AreaTableProps) {
                     tabIndex={-1}
                     key={row.id}
                     sx={{ cursor: 'pointer' }}
+                    onClick={() => router.push(`/areas/${row.id}`)}
                   >
                     <TableCell padding="checkbox">
                     </TableCell>
