@@ -19,7 +19,6 @@ const AreaForm = () => {
             name: areaName
           }
         })
-        console.log("Area data:", response);
       }}
     >
       <Input value={areaName} onChange={(e) => setAreaName(e.target.value)} label="Area Name" placeholder="Enter area name" />
