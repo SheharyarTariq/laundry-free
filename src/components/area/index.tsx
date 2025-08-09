@@ -38,7 +38,7 @@ const Area:React.FC<AreaProps> = ({ data }) => {
           <AreaForm />
         </div>
       </div>
-        <AreaTable data={data}/>
+        <AreaTable data={data.member}/>
     </div>
   )
 }

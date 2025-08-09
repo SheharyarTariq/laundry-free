@@ -14,6 +14,7 @@ export async function apiRequest(options: ApiRequestOptions) {
 
   if (isProtected) {
     const token = (await cookies()).get("accessToken")?.value;
+    console.log("api request token",token);
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     }

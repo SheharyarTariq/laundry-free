@@ -1,7 +1,8 @@
 
 export const routes = {
   ui: {
-    root: "/",
+    signIn: "/sign-in",
+    dashboard: "/dashboard",
     areas: "/areas",
     category: "/category",
     order: "/order",
