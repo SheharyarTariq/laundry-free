@@ -41,7 +41,7 @@ export default function GenericTable<T>({
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState(initialOrderBy || columns[0].id);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (property: string) => () => {
     const isAsc = orderBy === property && order === 'asc';
@@ -53,8 +53,8 @@ export default function GenericTable<T>({
     return data
       .slice()
       .sort((a, b) => {
-        const aVal = (a as any)[orderBy];
-        const bVal = (b as any)[orderBy];
+        const aVal = a[orderBy as keyof T];
+        const bVal = b[orderBy as keyof T];
         if (aVal < bVal) return order === 'asc' ? -1 : 1;
         if (aVal > bVal) return order === 'asc' ? 1 : -1;
         return 0;
@@ -62,8 +62,8 @@ export default function GenericTable<T>({
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   }, [data, order, orderBy, page, rowsPerPage]);
 
-  const emptyRows = Math.max(0, (1 + page) * rowsPerPage - data.length);
-
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2, borderRadius: '20px', overflow: 'hidden', boxShadow: '0 0 0 1px rgba(0,0,0,0.06)' }}>
@@ -98,7 +98,7 @@ export default function GenericTable<T>({
                 <TableRow hover key={keyAccessor(row)} sx={{ cursor: onRowClick ? 'pointer' : 'default' }} onClick={() => onRowClick && onRowClick(row)}>
                   {columns.map((col) => (
                     <TableCell key={col.id} align={col.numeric ? 'right' : 'left'}>
-                      {col.renderCell ? col.renderCell(row) : (row as any)[col.id]}
+                      {col.renderCell ? col.renderCell(row) : row[col.id as keyof T] as React.ReactNode}
                     </TableCell>
                   ))}
                 </TableRow>
@@ -114,7 +114,7 @@ export default function GenericTable<T>({
           </MuiTable>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}

@@ -252,6 +252,7 @@
 import { useRouter } from 'next/navigation';
 import EastIcon from '@mui/icons-material/East';
 import GenericTable, { Column } from '@/components/common/generic-table';
+import { routes } from '@/lib/utils/routes';
 
 interface Member {
   id: string;
@@ -278,7 +279,7 @@ export default function AreaTable({ data }: { data: Member[] }) {
       columns={columns}
       keyAccessor={(row) => row.id}
       initialOrderBy="name"
-      onRowClick={(row) => router.push(`/areas/${row.id}`)}
+      onRowClick={(row) => router.push(routes.ui.areaDetailPage(row.id))}
     />
   );
 }

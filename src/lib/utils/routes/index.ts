@@ -7,6 +7,7 @@ export const routes = {
     category: "/category",
     order: "/order",
     user: "/user",
+    areaDetailPage:(id: string) => `/areas/${id}`
   },
   api: {
     login: "api/auth/login",

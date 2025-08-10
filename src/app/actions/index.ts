@@ -2,7 +2,6 @@
 import { cookies } from 'next/headers';
 
 export async function setToken(accessToken: string, isAdmin: boolean) {
-  console.log("=====================================accessToken=====================================",accessToken)
   const cookieStore = await cookies();
   cookieStore.set('accessToken', accessToken, {
     httpOnly: true,
