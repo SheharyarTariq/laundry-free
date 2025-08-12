@@ -259,7 +259,7 @@ interface Member {
   name: string;
 }
 
-export default function AreaTable({ data }: { data: Member[] }) {
+export default function AreaTable({ data, loading }: { data: Member[],loading:boolean }) {
   const router = useRouter();
 
   const columns: Column<Member>[] = [
@@ -275,6 +275,7 @@ export default function AreaTable({ data }: { data: Member[] }) {
 
   return (
     <GenericTable<Member>
+      loading={loading}
       data={data}
       columns={columns}
       keyAccessor={(row) => row.id}

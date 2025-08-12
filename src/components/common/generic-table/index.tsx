@@ -27,6 +27,7 @@ type GenericTableProps<T> = {
   keyAccessor: (row: T) => string;
   initialOrderBy?: string;
   onRowClick?: (row: T) => void;
+  loading?: boolean;
 };
 
 type Order = 'asc' | 'desc';
@@ -37,30 +38,39 @@ export default function GenericTable<T>({
   keyAccessor,
   initialOrderBy,
   onRowClick,
+  loading = false,
 }: GenericTableProps<T>) {
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState(initialOrderBy || columns[0].id);
+  const [orderBy, setOrderBy] = useState<string | null>(initialOrderBy ?? null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (property: string) => () => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    if (orderBy === property) {
+      setOrder(order === 'asc' ? 'desc' : 'asc');
+    } else {
+      setOrderBy(property);
+      setOrder('asc');
+    }
   };
+  
 
   const visibleRows = useMemo(() => {
-    return data
-      .slice()
-      .sort((a, b) => {
+    const rows = data.slice();
+  
+    if (orderBy) {
+      rows.sort((a, b) => {
         const aVal = a[orderBy as keyof T];
         const bVal = b[orderBy as keyof T];
         if (aVal < bVal) return order === 'asc' ? -1 : 1;
         if (aVal > bVal) return order === 'asc' ? 1 : -1;
         return 0;
-      })
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+      });
+    }
+  
+    return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   }, [data, order, orderBy, page, rowsPerPage]);
+  
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
@@ -108,6 +118,17 @@ export default function GenericTable<T>({
                   height: emptyRows > 0 ? 0 : undefined
                 }}>
                   <TableCell colSpan={columns.length} />
+                </TableRow>
+              )}
+              {loading && (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    align="center"
+                    sx={{ color: '#999', fontStyle: 'italic' }}
+                  >
+                    Loading...
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>

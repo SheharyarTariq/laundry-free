@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useTransition } from 'react'
 import AreaTable from './area-table'
 import AreaForm from './area-form'
 import { SearchInput } from '../common/search-input'
@@ -17,7 +17,8 @@ interface AreaProps {
 
 const Area:React.FC<AreaProps> = ({ data }) => {
   const [searchTerm, setSearchTerm] = useState('')
-
+  // const [loading, setLoading] = useState(false)
+  const [loading, startTransition] = useTransition();
   return (
     <div className="flex flex-col gap-y-6 p-8">
       <div>
@@ -35,10 +36,10 @@ const Area:React.FC<AreaProps> = ({ data }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search pages…"
           />  
-          <AreaForm />
+          <AreaForm startTransition={startTransition}/>
         </div>
       </div>
-        <AreaTable data={data.member}/>
+        <AreaTable data={data.member} loading={loading}/>
     </div>
   )
 }

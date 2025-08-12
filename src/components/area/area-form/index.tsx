@@ -7,15 +7,22 @@ import { revalidatePathAction } from '@/app/actions/revalidate-path';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
-const AreaForm = () => {
-  const [areaName, setAreaName] = useState('')
+interface AreaForm {
+  startTransition: React.TransitionStartFunction;
+}
+
+const AreaForm:React.FC<AreaForm> = ({startTransition}) => {
+  const [areaName, setAreaName] = useState('');
+  const [submitFormloading, setSubmitFormLoading] = useState(false);
   return (
     <FormDialog
       title="Create Area"
       buttonText="Create"
       saveButtonText="Save Area"
+      loading={submitFormloading}
       onSubmit={async () => {
         try{
+          setSubmitFormLoading(true);
           const response = await apiCall({
             path: routes.api.postArea,
             method: 'POST',
@@ -25,9 +32,13 @@ const AreaForm = () => {
             }
           })
           if(response.status === 201){
-            await revalidatePathAction(routes.ui.areas)
+            startTransition(async () => {
+              await revalidatePathAction(routes.ui.areas)
+            });
             toast.success("Area added successfully")
+            setAreaName("");
           }
+          return true;
       }
         catch(error){
           if (axios.isAxiosError(error) && error.response?.data) {
@@ -39,6 +50,9 @@ const AreaForm = () => {
             toast.error("An unexpected error occurred.");
             console.log("Unexpected error in post area:", error);
           }
+          return false;
+        } finally{
+          setSubmitFormLoading(false);
         }
       }}
     >
