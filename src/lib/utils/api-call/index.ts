@@ -5,7 +5,7 @@ import { config as apiConfig } from "../../../../config";
 import { getTokens, removeTokens } from "@/app/actions";
 
 export interface ApiParams {
-  path: string;
+  endpoint: string;
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   params?: Record<string, unknown>;
   data?: Record<string, unknown> | FormData;
@@ -15,7 +15,7 @@ export interface ApiParams {
 }
 
 const apiCall = async ({
-  path,
+  endpoint,
   method = "GET",
   params,
   data,
@@ -25,7 +25,7 @@ const apiCall = async ({
   try {
     const { accessToken } = await getTokens();
     console.log("api call accessToken",accessToken);
-    const url = `${apiConfig.apiUrl}${path}`;
+    const url = `${apiConfig.apiUrl}${endpoint}`;
     const isFormData = data instanceof FormData;
     const config: AxiosRequestConfig = {
       url,

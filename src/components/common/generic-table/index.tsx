@@ -28,9 +28,15 @@ type GenericTableProps<T> = {
   initialOrderBy?: string;
   onRowClick?: (row: T) => void;
   loading?: boolean;
+  totalItems: number;
+  page?: number;
+  rowsPerPage?: number;
+  onPageChange?: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
+  onRowsPerPageChange?: (rows: number) => void;
 };
 
 type Order = 'asc' | 'desc';
+
 
 export default function GenericTable<T>({
   data,
@@ -38,12 +44,14 @@ export default function GenericTable<T>({
   keyAccessor,
   initialOrderBy,
   onRowClick,
+  totalItems,
   loading = false,
+  page = 0,
+  rowsPerPage = 10,
+  onPageChange
 }: GenericTableProps<T>) {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<string | null>(initialOrderBy ?? null);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (property: string) => () => {
     if (orderBy === property) {
@@ -56,7 +64,7 @@ export default function GenericTable<T>({
   
 
   const visibleRows = useMemo(() => {
-    const rows = data.slice();
+    const rows = (data ?? []).slice(); 
   
     if (orderBy) {
       rows.sort((a, b) => {
@@ -68,12 +76,9 @@ export default function GenericTable<T>({
       });
     }
   
-    return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  }, [data, order, orderBy, page, rowsPerPage]);
+    return rows;
+  }, [data, order, orderBy]);
   
-
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2, borderRadius: '20px', overflow: 'hidden', boxShadow: '0 0 0 1px rgba(0,0,0,0.06)' }}>
@@ -113,19 +118,13 @@ export default function GenericTable<T>({
                   ))}
                 </TableRow>
               ))}
-              {emptyRows > 0 && (
-                <TableRow style={{
-                  height: emptyRows > 0 ? 0 : undefined
-                }}>
-                  <TableCell colSpan={columns.length} />
-                </TableRow>
-              )}
               {loading && (
                 <TableRow>
                   <TableCell
                     colSpan={columns.length}
                     align="center"
-                    sx={{ color: '#999', fontStyle: 'italic' }}
+                    sx={{ color: '#999', fontStyle: 
+                      'italic' }}
                   >
                     Loading...
                   </TableCell>
@@ -137,14 +136,12 @@ export default function GenericTable<T>({
         <TablePagination
           rowsPerPageOptions={[10, 25]}
           component="div"
-          count={data.length}
+          
+          count={totalItems}
           rowsPerPage={rowsPerPage}
           page={page}
-          onPageChange={(_, newPage) => setPage(newPage)}
-          onRowsPerPageChange={(event) => {
-            setRowsPerPage(parseInt(event.target.value, 10));
-            setPage(0);
-          }}
+          onPageChange={onPageChange ?? (() => {})}
+          // onRowsPerPageChange={()=>{}}
         />
       </Paper>
     </Box>

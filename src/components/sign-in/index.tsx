@@ -31,7 +31,7 @@ const SignIn = () => {
     try {
       setLoading(true);
       const response = await apiCall({
-      path: routes.api.login,
+      endpoint: routes.api.login,
       method: "POST",
       isProtected: false,
       data: {...formData}

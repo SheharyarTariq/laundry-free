@@ -24,7 +24,7 @@ const AreaForm:React.FC<AreaForm> = ({startTransition}) => {
         try{
           setSubmitFormLoading(true);
           const response = await apiCall({
-            path: routes.api.postArea,
+            endpoint: routes.api.postArea,
             method: 'POST',
             isProtected: true,
             data: {

@@ -7,11 +7,12 @@ export const routes = {
     category: "/category",
     order: "/order",
     user: "/user",
-    areaDetailPage:(id: string) => `/areas/${id}`
+    areaDetailPage:(id: string) => `/areas/${id}`,
+    paginatedAreas:(id: string) => `/areas?page=${id}`,
   },
   api: {
-    login: "api/auth/login",
-    getAreas: "areas",
-    postArea: "areas",
+    login: "/api/auth/login",
+    postArea: "/areas",
+    getAreas:(id: string) => `/areas?page=${id}`,
   },
 };
