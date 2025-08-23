@@ -1,0 +1,23 @@
+'use client'
+import Link from 'next/link';
+import React from 'react'
+import { usePathname } from 'next/navigation';
+
+interface SecondaryButtonProps{
+  children: React.ReactNode
+  route: string;
+}
+
+const SecondaryButton:React.FC<SecondaryButtonProps> = ({children, route}) => {
+  const pathname = usePathname();
+
+  return (
+    <Link href={route}>
+      <button className={`px-4 py-2 rounded-lg text-white hover:cursor-pointer ${pathname===route ? "bg-deep-ocean" : null }`}>
+        {children}
+      </button>
+    </Link>
+  )
+}
+
+export default SecondaryButton

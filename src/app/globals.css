@@ -1,0 +1,17 @@
+@layer theme, base, mui, components, utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #212636;
+  --color-secondary: #121621;
+  --color-storm-indigo: #434A60;
+  --color-deep-ocean: #2A4F65;
+  --color-icy-mist: #DCDFE4;
+  --color-twilight-navy: #234355;
+  --color-twilight-teal: #2D556C;
+  --color-twilight-deep: #234355;
+  --color-slate-wave: #4f7084;
+  --shadow-custom-light: 0px 5px 22px 0px rgba(0, 0, 0, 0.04);
+  --shadow-custom-subtle: 0px 1px 2px 0px rgba(0, 0, 0, 0.08);
+  --shadow-border: 0px 0px 0px 1px rgba(0, 0, 0, 0.06);
+}
