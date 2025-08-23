@@ -13,7 +13,7 @@ const SecondaryButton:React.FC<SecondaryButtonProps> = ({children, route}) => {
 
   return (
     <Link href={route}>
-      <button className={`px-4 py-2 rounded-lg text-white hover:cursor-pointer ${pathname===route ? "bg-deep-ocean" : null }`}>
+      <button className={`px-4 py-2 rounded-lg text-white hover:cursor-pointer ${pathname.startsWith(route) ? "bg-deep-ocean" : ""}`}>
         {children}
       </button>
     </Link>

@@ -31,16 +31,16 @@ const SignIn = () => {
     try {
       setLoading(true);
       const response = await apiCall({
-      path: routes.api.login,
+      endpoint: routes.api.login,
       method: "POST",
       isProtected: false,
       data: {...formData}
     })
     if (response.status == 200) {
-      console.log(response);
+      console.log("token",response.data.result.token)
       await setToken(response.data.result.token, response.data.result.is_admin);
       toast.success("Login successful");
-      router.push(routes.ui.root);
+      router.push(routes.ui.areas);
     }
   } catch (error: unknown) {
     if (axios.isAxiosError(error) && error.response?.data) {
