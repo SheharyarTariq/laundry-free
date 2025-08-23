@@ -8,17 +8,19 @@ interface Member {
   name: string;
 }
 
-export default function AreaTable({ data, totalItems, loading, currentPage } :
+export default function PostcodeTable({id='', data, totalItems, loading, currentPage } :
   { 
     data: Member[];
     loading:boolean;
     totalItems: number;
     currentPage: string;
+    id?: string;
   }) {
     const router = useRouter();
 
   const columns: Column<Member>[] = [
-    { id: 'name', label: 'Area' },
+    { id: 'postcode', label: 'Postcodes' },
+
     {
       id: 'action',
       label: 'Action',
@@ -29,7 +31,7 @@ export default function AreaTable({ data, totalItems, loading, currentPage } :
   ];
 
   const handlePageChange = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    router.push(routes.ui.paginatedAreas(String(newPage + 1)));
+    router.push(routes.ui.paginatedPostcodes(id, (newPage + 1)));
   };
   
 
@@ -40,7 +42,7 @@ export default function AreaTable({ data, totalItems, loading, currentPage } :
       totalItems={totalItems}
       columns={columns}
       keyAccessor={(row) => row.id}
-      initialOrderBy="name"
+      initialOrderBy="postcode"
       page={Number(currentPage)-1}
       rowsPerPage={10}
       onRowClick={(row) => router.push(routes.ui.areaDetailPage(row.id))}

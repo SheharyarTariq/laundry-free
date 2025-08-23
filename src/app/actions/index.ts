@@ -2,7 +2,6 @@
 import { cookies } from 'next/headers';
 
 export async function setToken(accessToken: string, isAdmin: boolean) {
-
   const cookieStore = await cookies();
   cookieStore.set('accessToken', accessToken, {
     httpOnly: true,
@@ -30,4 +29,5 @@ export async function getTokens() {
 export async function removeTokens() {
   const cookieStore = await cookies();
   cookieStore.delete("accessToken");
+  cookieStore.delete("isAdmin");
 }

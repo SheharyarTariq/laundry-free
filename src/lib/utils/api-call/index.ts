@@ -5,7 +5,7 @@ import { config as apiConfig } from "../../../../config";
 import { getTokens, removeTokens } from "@/app/actions";
 
 export interface ApiParams {
-  path: string;
+  endpoint: string;
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   params?: Record<string, unknown>;
   data?: Record<string, unknown> | FormData;
@@ -15,7 +15,7 @@ export interface ApiParams {
 }
 
 const apiCall = async ({
-  path,
+  endpoint,
   method = "GET",
   params,
   data,
@@ -23,8 +23,9 @@ const apiCall = async ({
   isProtected,
 }: ApiParams): Promise<AxiosResponse> => {
   try {
-    const { accessToken } =await getTokens();
-    const url = `${apiConfig.apiUrl}${path}`;
+    const { accessToken } = await getTokens();
+    console.log("api call accessToken",accessToken);
+    const url = `${apiConfig.apiUrl}${endpoint}`;
     const isFormData = data instanceof FormData;
     const config: AxiosRequestConfig = {
       url,
@@ -32,7 +33,7 @@ const apiCall = async ({
       params,
       data,
       headers: {
-        ...(isFormData ? {} : { "Content-Type": "application/json" }),
+        ...{ "Content-Type": "application/ld+json", "Accept": "application/ld+json" },
         ...(isProtected ? { Authorization: `Bearer ${accessToken}` } : {}),
         ...headers,
       },
@@ -44,11 +45,11 @@ const apiCall = async ({
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError<unknown>;
     if (error.response?.status === 401) {
-      await removeTokens();
+      // await removeTokens();
       toast.error("Unauthorized. Please log in again.");
 
       if (typeof window !== "undefined") {
-        window.location.href = routes.ui.root;
+        // window.location.href = routes.ui.signIn;
       }
       return Promise.reject(new Error("Unauthorized"));
     } else {

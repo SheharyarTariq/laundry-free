@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Plus } from 'lucide-react';
 import PrimaryButton from '../primary-button';
-import Input from '../input';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -32,7 +31,7 @@ interface FormDialogProps {
   buttonText: string;
   saveButtonText: string;
   children: React.ReactNode;
-  onSubmit: (formData: Record<string, string>) => void;
+  onSubmit: (formData: Record<string, string>) => Promise<boolean>;
   loading?: boolean;
 }
 
@@ -53,9 +52,11 @@ export default function FormDialog({
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit = () => {
-    onSubmit({});
-    handleClose();
+  const handleSubmit =async () => {
+    const success = await onSubmit({});
+    if (success) {
+      handleClose();
+    }
   };
 
   return (
