@@ -33,7 +33,7 @@ const AreaForm:React.FC<AreaForm> = ({startTransition}) => {
           })
           if(response.status === 201){
             startTransition(async () => {
-              await revalidatePathAction(routes.ui.areas)
+              await revalidatePathAction(routes.ui.areaDetailPage(areaId))
             });
             toast.success("Area added successfully")
             setAreaName("");

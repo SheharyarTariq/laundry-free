@@ -96,11 +96,11 @@ const AreaDetailPage:React.FC<AreaDetailPageProps> = ({data, currentPage, areaId
                   endpoint: routes.api.postPostcode,
                   method: 'POST',
                   isProtected: true,
-                  data: {postcode,area:areaId}
+                  data: {postcode,area:`areas/${areaId}`}
                 })
-                if(response.status === 200){
+                if(response.status === 201){
                   startTransition(async () => {
-                    await revalidatePathAction(routes.ui.paginatedPostcodes(areaId, 1))
+                    await revalidatePathAction(routes.api.getPostcodes(areaId))
                   });
                   toast.success("Postcode added successfully")
                 }

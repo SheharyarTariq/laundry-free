@@ -33,7 +33,7 @@ const Area:React.FC<AreaProps> = ({ data, currentPage }) => {
           <SearchInput
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search pages…"
+            placeholder="name"
           />  
           <AreaForm startTransition={startTransition}/>
         </div>
