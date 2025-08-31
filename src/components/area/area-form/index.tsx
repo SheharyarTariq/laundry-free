@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { revalidatePathAction } from '@/app/actions/revalidate-path';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { Plus } from 'lucide-react';
 
 interface AreaForm {
   startTransition: React.TransitionStartFunction;
@@ -16,9 +17,9 @@ const AreaForm:React.FC<AreaForm> = ({startTransition}) => {
   const [submitFormloading, setSubmitFormLoading] = useState(false);
   return (
     <FormDialog
-      title="Create Area"
-      buttonText="Create"
-      saveButtonText="Save Area"
+      title="Create"
+      buttonText={ <><Plus /> Create</>}
+      saveButtonText="Save"
       loading={submitFormloading}
       onSubmit={async () => {
         try{
@@ -56,7 +57,7 @@ const AreaForm:React.FC<AreaForm> = ({startTransition}) => {
         }
       }}
     >
-      <Input value={areaName} onChange={(e) => setAreaName(e.target.value)} label="Area Name" placeholder="Enter area name" />
+      <Input value={areaName} onChange={(e) => setAreaName(e.target.value)} label="Name" placeholder="e.g. London" />
     </FormDialog>
   )
 }

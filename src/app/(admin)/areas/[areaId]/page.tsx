@@ -16,11 +16,10 @@ export default async function Page(props: {
   const page = searchParams.page || '1';
 
   const data = await apiRequest({
-    endpoint: routes.api.getPostcodes(areaId),
+    endpoint: routes.api.getPostcodes(areaId, page),
     isProtected: true,
     method: "GET",
   });
-  console.log("postcodes",data);
   return (
     <AreaDetailPage data={data} areaId={areaId} currentPage={page}/>
   )
