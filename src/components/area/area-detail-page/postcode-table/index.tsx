@@ -8,13 +8,14 @@ interface Member {
   name: string;
 }
 
-export default function PostcodeTable({id='', data, totalItems, loading, currentPage } :
+export default function PostcodeTable({id='', data, totalItems, loading, currentPage, children } :
   { 
     data: Member[];
     loading:boolean;
     totalItems: number;
     currentPage: string;
     id?: string;
+    children?: React.ReactNode;
   }) {
     const router = useRouter();
 
@@ -23,7 +24,7 @@ export default function PostcodeTable({id='', data, totalItems, loading, current
 
     {
       id: 'action',
-      label: 'Action',
+      label: <div className="flex justify-end">{children}</div>,
       numeric: true,
       disableSort: true,
       renderCell: () => <EastIcon sx={{ color: '#646464' }} />,

@@ -6,6 +6,7 @@ import DeleteArea from './delete-area';
 import AddPostcode from './add-postcode';
 import { routes } from '@/lib/utils/routes';
 import Link from 'next/link';
+import { Box, Typography } from '@mui/material';
 
 interface AreaDetailPageProps {
   areaId: string;
@@ -29,28 +30,29 @@ const AreaDetailPage:React.FC<AreaDetailPageProps> = ({data, currentPage, areaId
   const [loading, startTransition] = useTransition();
 
   return (
-    <div className="flex flex-col gap-y-6 p-8">
-      <div>
-        <div className="flex items-center gap-x-2">
+    <Box className="flex flex-col gap-y-6 p-8">
+      <Box>
+        <Box className="flex items-center gap-x-2">
           <Link href={routes.ui.areas} className="flex items-center gap-x-2 hover:cursor-pointer">
             <ArrowLeft className="w-6 h-6 text-primary" />
-            <p className="">Areas</p>
+            <Typography>Areas</Typography>
           </Link>
-        </div>
-        <div className="flex justify-between">
+        </Box>
+        <Box className="flex justify-between">
           <h1 className='text-2xl font-bold'>Areas</h1>
           <DeleteArea areaId={areaId} submitFormloading={submitFormloading} setSubmitFormLoading={setSubmitFormLoading} startTransition={startTransition}/>
-        </div>
-            <AddPostcode areaId={areaId} submitFormloading={submitFormloading} setSubmitFormLoading={setSubmitFormLoading} startTransition={startTransition}/>
+        </Box>
         <PostcodeTable
           id={areaId}
           data={data.member}
           currentPage={currentPage}
           loading={loading}
           totalItems={data.totalItems}
-        />
-      </div>
-    </div>
+        >
+          <AddPostcode areaId={areaId} submitFormloading={submitFormloading} setSubmitFormLoading={setSubmitFormLoading} startTransition={startTransition}/>
+        </PostcodeTable>
+      </Box>
+    </Box>
   )
 }
 
