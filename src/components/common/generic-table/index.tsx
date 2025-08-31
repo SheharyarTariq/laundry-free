@@ -15,7 +15,7 @@ import { visuallyHidden } from '@mui/utils';
 
 export type Column<T> = {
   id: string;
-  label: string;
+  label: string | React.ReactNode;
   numeric?: boolean;
   renderCell?: (row: T) => React.ReactNode;
   disableSort?: boolean;
