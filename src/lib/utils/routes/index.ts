@@ -21,6 +21,8 @@ export const routes = {
     getPostcodes:(id: string, page:string) => `/areas/${id}/postcodes?page=${page}`,
     deletePostcode:(id: string) => `/postcodes/${id}`,
     activePostcode:(id: string) => `/postcodes/${id}/mark-as-active`,
-    inactivePostcode:(id: string) => `/postcodes/${id}/mark-as-in-active`
+    inactivePostcode:(id: string) => `/postcodes/${id}/mark-as-in-active`,
+
+    categories:'/item-categories/admin-list',
   },
 };

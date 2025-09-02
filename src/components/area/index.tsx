@@ -28,15 +28,7 @@ const Area:React.FC<AreaProps> = ({ data, currentPage }) => {
       </div>
       <div>
         <div className="flex gap-x-4">   
-<<<<<<< HEAD
-          <SearchInput
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="name"
-          />  
-=======
           <AreaSearch />
->>>>>>> c1ef648da5d34d52466edaadc3fb5ab5b37db5a6
           <AreaForm startTransition={startTransition}/>
         </div>
       </div>
