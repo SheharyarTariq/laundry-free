@@ -5,6 +5,7 @@ export const routes = {
     dashboard: "/dashboard",
     areas: "/areas",
     category: "/category",
+    items: "/items",
     order: "/order",
     user: "/user",
     areaDetailPage:(id: string) => `/areas/${id}`,
@@ -24,5 +25,10 @@ export const routes = {
     inactivePostcode:(id: string) => `/postcodes/${id}/mark-as-in-active`,
 
     categories:'/item-categories/admin-list',
+    postCategory:'/item-categories',
+    categorydetails:(id: string, name:string) => `/item-categories/${id}`,
+    categoryitems:(id: string) => `/item-categories/${id}/items`,
+    postcategoryitems:(id: string) => `/items`,
+    deletecategoryitem:(id: string) => `/items/${id}`,
   },
 };
