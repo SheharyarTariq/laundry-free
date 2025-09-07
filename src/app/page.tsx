@@ -7,11 +7,7 @@ function Page() {
     useEffect(() => {
         router.push(routes.ui.areas);
     }, []);
-  return (
-    <div>
-      
-    </div>
-  )
+  
 }
 
 export default Page
