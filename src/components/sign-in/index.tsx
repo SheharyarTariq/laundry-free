@@ -37,7 +37,6 @@ const SignIn = () => {
       data: {...formData}
     })
     if (response.status == 200) {
-      console.log("token",response.data.result.token)
       await setToken(response.data.result.token, response.data.result.is_admin);
       toast.success("Login successful");
       router.push(routes.ui.areas);
@@ -48,7 +47,6 @@ const SignIn = () => {
       toast.error(errorMessage);
     } else {
       toast.error("An unexpected error occurred.");
-      console.log("Unexpected error:", error);
     }
     } finally {
     setLoading(false);

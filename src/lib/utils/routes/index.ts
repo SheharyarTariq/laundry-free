@@ -5,9 +5,9 @@ export const routes = {
     dashboard: "/dashboard",
     areas: "/areas",
     category: "/category",
-    items: "/items",
     order: "/order",
     user: "/user",
+    userDetailPage:(id: string) => `/user/${id}`,
     areaDetailPage:(id: string) => `/areas/${id}`,
     paginatedAreas:(id: string) => `/areas?page=${id}`,
     paginatedPostcodes:(id: string, page:number) => `/areas/${id}?page=${page}`,
@@ -30,5 +30,10 @@ export const routes = {
     categoryitems:(id: string) => `/item-categories/${id}/items`,
     postcategoryitems:(id: string) => `/items`,
     deletecategoryitem:(id: string) => `/items/${id}`,
+
+    orders:'/orders/admin-list',
+
+    user:'/users/admin-list',
+    getuserdetails:(id: string) => `/users/${id}/admin-detail`,
   },
 };
