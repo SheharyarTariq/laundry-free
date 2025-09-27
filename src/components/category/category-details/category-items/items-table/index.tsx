@@ -37,9 +37,7 @@ export default function ItemsTable({ categoryId }: Readonly<ItemsTableProps>) {
           method: "GET",
           isProtected: true,
         });
-        console.log("Full Items API response:", JSON.stringify(response, null, 2));
-        console.log("Response data:", JSON.stringify(response?.data, null, 2));
-        console.log("Response data member:", JSON.stringify(response?.data?.member, null, 2));
+      
         const rawItems = response?.data?.member || [];
         
         // Transform the data to handle object fields properly
@@ -101,8 +99,12 @@ export default function ItemsTable({ categoryId }: Readonly<ItemsTableProps>) {
 
   return (
     <div className="p-8">
-      <h2 className="text-xl font-semibold mb-4">Items in this Category</h2>
-      <ItemsAdd categoryId={categoryId} onItemAdded={() => window.location.reload()} />
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-semibold -mt-3">Items in this category</h2>
+        <div className="mt-1">
+        <ItemsAdd categoryId={categoryId} onItemAdded={() => window.location.reload()} />
+        </div>
+      </div>
       <GenericTable<ItemRow>
         loading={loading}
         data={data}

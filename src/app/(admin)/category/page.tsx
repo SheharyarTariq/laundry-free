@@ -20,6 +20,5 @@ export default async function Page(props: Readonly<{ searchParams: SearchParams}
     method: "GET",
   });
   
-  console.log("category",data)
   return <Category data={data} currentPage={page} />
 }

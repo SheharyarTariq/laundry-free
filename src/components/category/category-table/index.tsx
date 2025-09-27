@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import EastIcon from '@mui/icons-material/East';
 import GenericTable, { Column } from '@/components/common/generic-table';
 import { useRouter } from 'next/navigation';
@@ -30,9 +30,6 @@ export default function CategoryTable({ data, totalItems, loading, currentPage }
 
   const rowsPerPage = 10;
   const pageIndex = Math.max(0, Number(currentPage) - 1);
-  const pagedData = useMemo(() => {
-    return (data ?? []).slice(pageIndex * rowsPerPage, pageIndex * rowsPerPage + rowsPerPage);
-  }, [data, pageIndex]);
 
   const handlePageChange = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     router.push(`${routes.ui.category}?page=${newPage + 1}`);
@@ -41,7 +38,7 @@ export default function CategoryTable({ data, totalItems, loading, currentPage }
   return (
     <GenericTable<Member>
       loading={loading}
-      data={pagedData}
+      data={data}
       totalItems={totalItems}
       columns={columns}
       keyAccessor={(row) => row.id}
