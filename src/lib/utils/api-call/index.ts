@@ -1,8 +1,7 @@
 import toast from "react-hot-toast";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { routes } from "../routes";
 import { config as apiConfig } from "../../../../config";
-import { getTokens, removeTokens } from "@/app/actions";
+import { getTokens } from "@/app/actions";
 
 export interface ApiParams {
   endpoint: string;
