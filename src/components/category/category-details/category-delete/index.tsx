@@ -14,7 +14,7 @@ export default function CategoryDelete({ id }: Readonly<{ id: string }>) {
   return (
     <FormDialog
       title="Delete Category"
-      buttonText={<><DeleteOutlineIcon fontSize="small" /> Delete</>}
+      buttonText= "Delete"
       saveButtonText="Confirm"
       loading={loading}
       onSubmit={async () => {

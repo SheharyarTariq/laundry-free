@@ -63,9 +63,16 @@ export default function FormDialog({
 
   return (
     <React.Fragment>
-      <PrimaryButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
-        {buttonText}
-      </PrimaryButton>
+      {buttonText === "Delete" ? (
+        <DeleteButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
+          {buttonText}
+        </DeleteButton>
+      ) : (
+       
+        <PrimaryButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
+          {buttonText}
+        </PrimaryButton>
+      )}
       <BootstrapDialog
         maxWidth="sm"
         fullWidth

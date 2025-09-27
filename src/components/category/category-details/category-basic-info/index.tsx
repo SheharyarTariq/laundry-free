@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Spinner from "@/components/common/spinner";
 import CategoryEdit from "../category-edit";
 import CategoryDelete from "../category-delete";
 import apiCall from "@/lib/utils/api-call";
 import { routes } from "@/lib/utils/routes";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface CategoryDetailsProps {
   id: string;
@@ -17,6 +19,7 @@ interface Category {
 }
 
 export default function CategoryBasicInfo({ id }: Readonly<CategoryDetailsProps>) {
+  const router = useRouter();
   const [category, setCategory] = useState<Category | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +32,6 @@ export default function CategoryBasicInfo({ id }: Readonly<CategoryDetailsProps>
       method: "GET",
       isProtected: true,
     });
-    console.log("Category details response:", response?.data);
     setCategory(response?.data as Category);
     setLoading(false);
   }, [id]);
@@ -42,10 +44,23 @@ export default function CategoryBasicInfo({ id }: Readonly<CategoryDetailsProps>
   if (error) return <div className="p-8 text-red-600">{error}</div>;
   if (!category) return null;
 
+  const handleBackClick = () => {
+    router.back();
+  };
+
   return (
     <div className="p-8">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Category Details</h1>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleBackClick}
+            className="flex items-center justify-center w-10 h-10 rounded-lg  hover:bg-gray-50 transition-colors"
+            title="Go back"
+          >
+            <ArrowBackIcon className="text-gray-600" />
+          </button>
+          <h1 className="text-2xl font-bold">Category Details</h1>
+        </div>
         {category && (
           <div className="flex items-center gap-2">
             <CategoryEdit id={category.id} name={category.name} description={category.description} onUpdated={fetchDetails} />

@@ -13,6 +13,5 @@ export default async function Page(props:{ searchParams: SearchParams}) {
     isProtected: true,
     method: "GET",
   });
-  console.log("area",data)
   return <Area data={data} currentPage={page }/>
 }
