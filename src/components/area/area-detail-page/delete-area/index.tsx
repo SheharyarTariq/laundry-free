@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from 'react';
+import React from 'react';
 import FormDialog from '@/components/common/form-dailog';
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -7,7 +7,6 @@ import { routes } from '@/lib/utils/routes';
 import { useRouter } from 'next/navigation';
 import { revalidatePathAction } from '@/app/actions/revalidate-path';
 import { Typography } from '@mui/material';
-
 
 interface DeleteAreaProps {
   areaId: string;
