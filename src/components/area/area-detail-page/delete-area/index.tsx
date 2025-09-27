@@ -48,7 +48,6 @@ const DeleteArea: React.FC<DeleteAreaProps> = ({ areaId, submitFormloading, setS
             }
           } else {
             toast.error("An unexpected error occurred.");
-            console.log("Unexpected error in post area:", error);
           }
           return false;
         } finally {
