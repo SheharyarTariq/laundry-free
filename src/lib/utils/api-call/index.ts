@@ -23,7 +23,6 @@ const apiCall = async ({
 }: ApiParams): Promise<AxiosResponse> => {
   try {
     const { accessToken } = await getTokens();
-    console.log("api call accessToken",accessToken);
     const url = `${apiConfig.apiUrl}${endpoint}`;
     const isFormData = data instanceof FormData;
     const config: AxiosRequestConfig = {
@@ -38,13 +37,12 @@ const apiCall = async ({
       },
     };
 
-    const response = await axios(config);
+    const response = await axios(config); 
     return response;
   } catch (error: unknown) {
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError<unknown>;
     if (error.response?.status === 401) {
-      // await removeTokens();
       toast.error("Unauthorized. Please log in again.");
 
       if (typeof window !== "undefined") {
@@ -52,12 +50,10 @@ const apiCall = async ({
       }
       return Promise.reject(new Error("Unauthorized"));
     } else {
-      console.log("Unexpected API error:", error);
       return Promise.reject(axiosError);
     }
   }
 
-  console.log("Non-Axios Error", error);
   return Promise.reject(error);
 }
 

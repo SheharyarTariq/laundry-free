@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PrimaryButton from '../primary-button';
+import DeleteButton from '../delete-button';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -32,6 +33,7 @@ interface FormDialogProps {
   children: React.ReactNode;
   onSubmit: (formData: Record<string, string>) => Promise<boolean>;
   loading?: boolean;
+  danger?: boolean;
 }
 
 export default function FormDialog({ 
@@ -40,8 +42,9 @@ export default function FormDialog({
   saveButtonText, 
   onSubmit,
   loading = false,
-  children
-}: FormDialogProps) {
+  children,
+  danger = false,
+}: Readonly<FormDialogProps>) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -60,9 +63,16 @@ export default function FormDialog({
 
   return (
     <React.Fragment>
-      <PrimaryButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
-        {buttonText}
-      </PrimaryButton>
+      {buttonText === "Delete" ? (
+        <DeleteButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
+          {buttonText}
+        </DeleteButton>
+      ) : (
+       
+        <PrimaryButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
+          {buttonText}
+        </PrimaryButton>
+      )}
       <BootstrapDialog
         maxWidth="sm"
         fullWidth
@@ -89,9 +99,15 @@ export default function FormDialog({
           {children}
         </DialogContent>
         <DialogActions>
-          <PrimaryButton onClick={handleSubmit} disabled={loading}>
-            {loading ? 'Saving...' : saveButtonText}
-          </PrimaryButton>
+          {danger ? (
+            <DeleteButton onClick={handleSubmit} disabled={loading}>
+              {loading ? 'Deleting...' : saveButtonText}
+            </DeleteButton>
+          ) : (
+            <PrimaryButton onClick={handleSubmit} disabled={loading}>
+              {loading ? 'Saving...' : saveButtonText}
+            </PrimaryButton>
+          )}
         </DialogActions>
       </BootstrapDialog>
     </React.Fragment>
