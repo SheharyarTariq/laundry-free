@@ -41,7 +41,7 @@ export default function ItemsTable({ categoryId }: Readonly<ItemsTableProps>) {
         const rawItems = response?.data?.member || [];
         
         // Transform the data to handle object fields properly
-        const items: ItemRow[] = rawItems.map((item: any) => ({
+        const items: ItemRow[] = rawItems.map((item:ItemRow) => ({
           id: item.id || '',
           name: item.name || '',
           description: item.description || null,

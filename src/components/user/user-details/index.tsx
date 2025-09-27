@@ -6,7 +6,7 @@ import apiCall from '@/lib/utils/api-call';
 import { routes } from '@/lib/utils/routes';
 
 export default function UserDetails({ userId }: Readonly<{ userId: string }>) {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export default function UserDetails({ userId }: Readonly<{ userId: string }>) {
         });
         setData(response.data);
       } catch (error) {
+        console.error("Error fetching user details:", error);
         // Handle error silently
       } finally {
         setLoading(false);

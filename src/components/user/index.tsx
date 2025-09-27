@@ -10,7 +10,14 @@ interface User {
   email: string;
   emailVerifiedAt: string;
   createdAt: string;
-  address: object;
+  address: Address;
+}
+
+interface Address {
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
 }
 
 interface UserProps {

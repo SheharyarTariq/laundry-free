@@ -24,7 +24,7 @@ const apiCall = async ({
   try {
     const { accessToken } = await getTokens();
     const url = `${apiConfig.apiUrl}${endpoint}`;
-    const isFormData = data instanceof FormData;
+    // const isFormData = data instanceof FormData;
     const config: AxiosRequestConfig = {
       url,
       method,

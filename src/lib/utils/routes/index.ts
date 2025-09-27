@@ -26,9 +26,9 @@ export const routes = {
 
     categories:'/item-categories/admin-list',
     postCategory:'/item-categories',
-    categorydetails:(id: string, name:string) => `/item-categories/${id}`,
+    categorydetails:(id: string) => `/item-categories/${id}`,
     categoryitems:(id: string) => `/item-categories/${id}/items`,
-    postcategoryitems:(id: string) => `/items`,
+    postcategoryitems: "/items",
     deletecategoryitem:(id: string) => `/items/${id}`,
 
     orders:'/orders/admin-list',
