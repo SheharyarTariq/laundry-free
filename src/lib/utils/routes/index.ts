@@ -15,10 +15,10 @@ export const routes = {
   api: {
     login: "/api/auth/login",
     postArea: "/areas",
-    deleteArea:(id: string) => `/areas/${id}`,
-    getAreas:(id: string) => `/areas?page=${id}`,
-    getPostcodes:(id: string) => `/areas/${id}/postcodes`,
     postPostcode: "/postcodes",
+    deleteArea:(id: string) => `/areas/${id}`,
+    getAreas:(id: string, name:string) => `/areas?name=${name}&page=${id}`,
+    getPostcodes:(id: string, page:string) => `/areas/${id}/postcodes?page=${page}`,
     deletePostcode:(id: string) => `/postcodes/${id}`,
     activePostcode:(id: string) => `/postcodes/${id}/mark-as-active`,
     inactivePostcode:(id: string) => `/postcodes/${id}/mark-as-in-active`

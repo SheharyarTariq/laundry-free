@@ -2,8 +2,7 @@
 import React, { useTransition } from 'react'
 import AreaTable from './area-table'
 import AreaForm from './area-form'
-import { SearchInput } from '../common/search-input'
-import { useState } from 'react'
+import AreaSearch from './area-search'
 interface AreaProps {
   data: {
     member: Member[]
@@ -20,21 +19,16 @@ interface Member {
 }
 
 const Area:React.FC<AreaProps> = ({ data, currentPage }) => {
-  const [searchTerm, setSearchTerm] = useState('')
   const [loading, startTransition] = useTransition();
+
   return (
     <div className="flex flex-col gap-y-6 p-8">
       <div>
         <h1 className='text-2xl font-bold'>Areas</h1>
       </div>
       <div>
-        <label htmlFor="search" className="text-sm font-medium">Search</label>
         <div className="flex gap-x-4">   
-          <SearchInput
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search pages…"
-          />  
+          <AreaSearch />
           <AreaForm startTransition={startTransition}/>
         </div>
       </div>

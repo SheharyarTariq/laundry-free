@@ -18,7 +18,7 @@ export default function AreaTable({ data, totalItems, loading, currentPage } :
     const router = useRouter();
 
   const columns: Column<Member>[] = [
-    { id: 'name', label: 'Area' },
+    { id: 'name', label: 'Name' },
     {
       id: 'action',
       label: 'Action',

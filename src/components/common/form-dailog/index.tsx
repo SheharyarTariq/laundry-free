@@ -6,7 +6,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { Plus } from 'lucide-react';
 import PrimaryButton from '../primary-button';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -28,7 +27,7 @@ interface FormField {
 
 interface FormDialogProps {
   title: string;
-  buttonText: string;
+  buttonText: React.ReactNode;
   saveButtonText: string;
   children: React.ReactNode;
   onSubmit: (formData: Record<string, string>) => Promise<boolean>;
@@ -62,7 +61,7 @@ export default function FormDialog({
   return (
     <React.Fragment>
       <PrimaryButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
-        <Plus /> {buttonText}
+        {buttonText}
       </PrimaryButton>
       <BootstrapDialog
         maxWidth="sm"
