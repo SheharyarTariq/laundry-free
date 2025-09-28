@@ -18,14 +18,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-interface FormField {
-  name: string;
-  label: string;
-  placeholder: string;
-  type?: string;
-  required?: boolean;
-}
-
 interface FormDialogProps {
   title: string;
   buttonText: React.ReactNode;
@@ -75,7 +67,7 @@ export default function FormDialog({
           {buttonText}
         </DeleteButton>
       ) : (
-       
+      
         <PrimaryButton className="flex items-center gap-x-2 px-4 max-w-max" onClick={handleClickOpen}>
           {buttonText}
         </PrimaryButton>

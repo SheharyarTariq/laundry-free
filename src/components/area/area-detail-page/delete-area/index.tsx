@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { revalidatePathAction } from '@/app/actions/revalidate-path';
 import { Typography } from '@mui/material';
 
-
 interface DeleteAreaProps {
   areaId: string;
   submitFormloading: boolean

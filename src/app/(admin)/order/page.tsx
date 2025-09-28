@@ -15,7 +15,7 @@ export default async function Page(props: Readonly<{ searchParams: SearchParams}
   params.set('page', page);
   params.set('itemsPerPage', itemsPerPage);
 
-  const data = await apiRequest({
+  await apiRequest({
     endpoint: `${routes.api.orders}?${params.toString()}`,
     isProtected: true,
     method: "GET",

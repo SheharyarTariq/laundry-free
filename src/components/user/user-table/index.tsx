@@ -12,7 +12,14 @@ interface User {
   email: string;
   emailVerifiedAt: string;
   createdAt: string;
-  address: object;
+  address: Address;
+}
+
+interface Address {
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
 }
 
 export default function UserTable({ data, totalItems, loading, currentPage }: Readonly<{ 
@@ -31,7 +38,7 @@ export default function UserTable({ data, totalItems, loading, currentPage }: Re
       id: 'address', 
       label: 'Address',
       renderCell: (row) => {
-        const address = row.address as any;
+        const address = row.address as Address;
         if (address && typeof address === 'object') {
           const addressParts = [];
           if (address.street) addressParts.push(address.street);

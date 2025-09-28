@@ -3,6 +3,7 @@ import React, { useTransition } from 'react'
 import AreaTable from './area-table'
 import AreaForm from './area-form'
 import AreaSearch from './area-table/area-search'
+
 interface AreaProps {
   data: {
     member: Member[]

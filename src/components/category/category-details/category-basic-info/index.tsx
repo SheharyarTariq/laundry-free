@@ -26,7 +26,7 @@ export default function CategoryBasicInfo({ id }: Readonly<CategoryDetailsProps>
     setLoading(true);
     setError(null);
     const response = await apiCall({
-      endpoint: routes.api.categorydetails(id, ""),
+      endpoint: routes.api.categorydetails(id),
       method: "GET",
       isProtected: true,
     });

@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { config as apiConfig } from "../../../../config";
-import { getTokens, removeTokens } from "@/app/actions";
+import { getTokens } from "@/app/actions";
 
 export interface ApiParams {
   endpoint: string;
@@ -24,7 +24,7 @@ const apiCall = async ({
   try {
     const { accessToken } = await getTokens();
     const url = `${apiConfig.apiUrl}${endpoint}`;
-    const isFormData = data instanceof FormData;
+    // const isFormData = data instanceof FormData;
     const config: AxiosRequestConfig = {
       url,
       method,

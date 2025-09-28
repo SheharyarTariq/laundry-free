@@ -42,7 +42,7 @@ export default function ItemsDelete({ item, onDeleted }: Readonly<ItemsDeletePro
         return true;
       }
       return false;
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error deleting item:", error);
       toast.error("Failed to delete item");
       return false;

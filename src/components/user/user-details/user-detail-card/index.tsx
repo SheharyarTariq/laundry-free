@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Paper, Card, CardContent, Chip, Divider } from '@mui/material';
+import { Box, Typography, Card, CardContent, Chip, Divider } from '@mui/material';
 import { Person, Email, Phone, LocationOn, CalendarToday, VerifiedUser } from '@mui/icons-material';
 import BackArrow from '@/components/common/arrowback';
 
@@ -10,17 +10,19 @@ interface UserDetail {
   email: string;
   emailVerifiedAt: string;
   createdAt: string;
-  address: {
+  address: AddressProps;
+}
+
+interface AddressProps {
     street?: string;
     city?: string;
     state?: string;
     zipCode?: string;
     country?: string;
-  };
 }
 
 export default function UserDetailCard({ data }: Readonly<{ data: UserDetail }>) {
-  const formatAddress = (address: any) => {
+  const formatAddress = (address:AddressProps) => {
     if (!address || typeof address !== 'object') return 'No address provided';
     
     const addressParts = [];
