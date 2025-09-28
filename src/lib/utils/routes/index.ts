@@ -14,7 +14,7 @@ export const routes = {
 
   },
   api: {
-    login: "/api/auth/login",
+    login: "api/auth/login",
     postArea: "/areas",
     postPostcode: "/postcodes",
     deleteArea:(id: string) => `/areas/${id}`,
