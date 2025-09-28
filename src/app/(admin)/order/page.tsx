@@ -1,6 +1,7 @@
 import React from 'react'
 import { routes } from '@/lib/utils/routes';
 import { apiRequest } from '@/lib/utils/api-request';
+import Order from '@/components/order';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>
 
@@ -14,11 +15,11 @@ export default async function Page(props: Readonly<{ searchParams: SearchParams}
   params.set('page', page);
   params.set('itemsPerPage', itemsPerPage);
 
-  await apiRequest({
+  const data = await apiRequest({
     endpoint: `${routes.api.orders}?${params.toString()}`,
     isProtected: true,
     method: "GET",
   });
   
-  return <div>Order</div>
+  return <Order data={data} currentPage={page} />
 }

@@ -31,33 +31,33 @@ const SignIn = () => {
     try {
       setLoading(true);
       const response = await apiCall({
-      endpoint: routes.api.login,
-      method: "POST",
-      isProtected: false,
-      data: {...formData}
-    })
-    if (response.status == 200) {
-      await setToken(response.data.result.token, response.data.result.is_admin);
-      toast.success("Login successful");
-      router.push(routes.ui.areas);
-    }
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response?.data) {
-      const errorMessage = String(Object.values(error?.response?.data.errors)[0]) || "Something went wrong"
-      toast.error(errorMessage);
-    } else {
-      toast.error("An unexpected error occurred.");
-    }
+        endpoint: routes.api.login,
+        method: "POST",
+        isProtected: false,
+        data: {...formData}
+      })
+      if (response.status == 200) {
+        await setToken(response.data.result.token, response.data.result.is_admin);
+        toast.success("Login successful");
+        router.push(routes.ui.areas);
+      }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const errorMessage = String(Object.values(error?.response?.data.errors)[0]) || "Something went wrong"
+        toast.error(errorMessage);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
-    setLoading(false);
-  }
+      setLoading(false);
+    }
   }
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="shadow-custom-light rounded-[20px] w-xl">
-        <div className="shadow-border px-6 py-8 rounded-[20px] w-xl">
-          <h2 className="w-full flex py-8 text-center text-4xl font-semibold bg-gradient-to-t from-twilight-deep to-twilight-teal bg-clip-text text-transparent">
+      <div className="shadow-custom-light rounded-[20px] w-xs sm:w-normal md:w-lg lg::w-xl">
+        <div className="shadow-border px-6 py-8 rounded-[20px] w-xs sm:w-normal md:w-lg lg::w-xl">
+          <h2 className="w-full flex py-8 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold bg-gradient-to-t from-twilight-deep to-twilight-teal bg-clip-text text-transparent">
             Laundry free
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">

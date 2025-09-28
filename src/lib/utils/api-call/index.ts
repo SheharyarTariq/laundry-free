@@ -40,22 +40,22 @@ const apiCall = async ({
     const response = await axios(config); 
     return response;
   } catch (error: unknown) {
-  if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<unknown>;
-    if (error.response?.status === 401) {
-      toast.error("Unauthorized. Please log in again.");
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError<unknown>;
+      if (error.response?.status === 401) {
+        toast.error("Unauthorized. Please log in again.");
 
-      if (typeof window !== "undefined") {
-        // window.location.href = routes.ui.signIn;
+        if (typeof window !== "undefined") {
+          // window.location.href = routes.ui.signIn;
+        }
+        return Promise.reject(new Error("Unauthorized"));
+      } else {
+        return Promise.reject(axiosError);
       }
-      return Promise.reject(new Error("Unauthorized"));
-    } else {
-      return Promise.reject(axiosError);
     }
-  }
 
-  return Promise.reject(error);
-}
+    return Promise.reject(error);
+  }
 
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Card, CardContent, Chip, Divider } from '@mui/material';
 import { Person, Email, Phone, LocationOn, CalendarToday, VerifiedUser } from '@mui/icons-material';
+import BackArrow from '@/components/common/arrowback';
 
 interface UserDetail {
   id: string;
@@ -36,10 +37,12 @@ export default function UserDetailCard({ data }: Readonly<{ data: UserDetail }>)
 
   return (
     <Box sx={{ p: 4, maxWidth: 800, mx: 'auto' }}>
-      <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold', color: '#212636', mb: 3 }}>
+      <div className='flex items-center gap-2 mb-3'>
+        <BackArrow/>
+      <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold', color: '#212636', }}>
         User Details
       </Typography>
-
+      </div>
       <Card 
         elevation={0}
         sx={{ 
