@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({
         <label
           htmlFor={inputId}
           className={clsx(
-            "text-sm block pb-[3px] text-primary font-medium",
+            "text-xs sm:text-sm block pb-[3px] text-primary font-medium",
             labelClassName
           )}
         >
@@ -38,7 +38,7 @@ const Input: React.FC<InputProps> = ({
       <input
         id={inputId}
         className={clsx(
-          "border border-icy-mist w-full outline-none shadow-custom-subtle rounded-lg py-2 px-3 ",
+          "border border-icy-mist w-full text-xs sm:text-sm md:text-base outline-none shadow-custom-subtle rounded-lg py-2 px-3 ",
           className
         )}
         required={required}

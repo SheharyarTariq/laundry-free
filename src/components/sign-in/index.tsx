@@ -55,9 +55,9 @@ const SignIn = () => {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="shadow-custom-light rounded-[20px] w-xl">
-        <div className="shadow-border px-6 py-8 rounded-[20px] w-xl">
-          <h2 className="w-full flex py-8 text-center text-4xl font-semibold bg-gradient-to-t from-twilight-deep to-twilight-teal bg-clip-text text-transparent">
+      <div className="shadow-custom-light rounded-[20px] w-xs sm:w-normal md:w-lg lg::w-xl">
+        <div className="shadow-border px-6 py-8 rounded-[20px] w-xs sm:w-normal md:w-lg lg::w-xl">
+          <h2 className="w-full flex py-8 text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold bg-gradient-to-t from-twilight-deep to-twilight-teal bg-clip-text text-transparent">
             Laundry free
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
