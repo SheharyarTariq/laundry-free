@@ -31,26 +31,26 @@ const SignIn = () => {
     try {
       setLoading(true);
       const response = await apiCall({
-      endpoint: routes.api.login,
-      method: "POST",
-      isProtected: false,
-      data: {...formData}
-    })
-    if (response.status == 200) {
-      await setToken(response.data.result.token, response.data.result.is_admin);
-      toast.success("Login successful");
-      router.push(routes.ui.areas);
-    }
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error) && error.response?.data) {
-      const errorMessage = String(Object.values(error?.response?.data.errors)[0]) || "Something went wrong"
-      toast.error(errorMessage);
-    } else {
-      toast.error("An unexpected error occurred.");
-    }
+        endpoint: routes.api.login,
+        method: "POST",
+        isProtected: false,
+        data: {...formData}
+      })
+      if (response.status == 200) {
+        await setToken(response.data.result.token, response.data.result.is_admin);
+        toast.success("Login successful");
+        router.push(routes.ui.areas);
+      }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.data) {
+        const errorMessage = String(Object.values(error?.response?.data.errors)[0]) || "Something went wrong"
+        toast.error(errorMessage);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
-    setLoading(false);
-  }
+      setLoading(false);
+    }
   }
 
   return (
