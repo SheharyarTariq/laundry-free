@@ -46,6 +46,7 @@ export default function FormDialog({
   danger = false,
 }: Readonly<FormDialogProps>) {
   const [open, setOpen] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,10 +55,16 @@ export default function FormDialog({
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSubmit =async () => {
-    const success = await onSubmit({});
-    if (success) {
-      handleClose();
+  
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      const success = await onSubmit({});
+      if (success) {
+        handleClose();
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -99,15 +106,24 @@ export default function FormDialog({
           {children}
         </DialogContent>
         <DialogActions>
-          {danger ? (
-            <DeleteButton onClick={handleSubmit} disabled={loading}>
-              {loading ? 'Deleting...' : saveButtonText}
-            </DeleteButton>
-          ) : (
-            <PrimaryButton onClick={handleSubmit} disabled={loading}>
-              {loading ? 'Saving...' : saveButtonText}
-            </PrimaryButton>
-          )}
+        {buttonText === "Delete" ? (
+        <DeleteButton 
+          className="flex items-center gap-x-2 px-4 max-w-max" 
+          onClick={handleSubmit}
+          disabled={isSubmitting || loading}
+        >
+          {isSubmitting || loading ? "Deleting..." : buttonText}
+        </DeleteButton>
+      ) : (
+       
+        <PrimaryButton 
+          className="flex items-center gap-x-2 px-4 max-w-max" 
+          onClick={handleSubmit}
+          disabled={isSubmitting || loading}
+        >
+          {isSubmitting || loading ? "Saving..." : buttonText}
+        </PrimaryButton>
+      )}
         </DialogActions>
       </BootstrapDialog>
     </React.Fragment>

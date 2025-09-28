@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import UserDetailCard from './user-detail-table';
+import UserDetailCard from './user-detail-card';
 import Spinner from '@/components/common/spinner';
 import apiCall from '@/lib/utils/api-call';
 import { routes } from '@/lib/utils/routes';

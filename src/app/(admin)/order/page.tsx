@@ -1,6 +1,7 @@
 import React from 'react'
 import { routes } from '@/lib/utils/routes';
 import { apiRequest } from '@/lib/utils/api-request';
+import Order from '@/components/order';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>
 
@@ -20,5 +21,5 @@ export default async function Page(props: Readonly<{ searchParams: SearchParams}
     method: "GET",
   });
   
-  return <div>Order</div>
+  return <Order data={data} currentPage={page} />
 }
