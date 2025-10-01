@@ -20,6 +20,9 @@ export default async function Page(props: {
     isProtected: true,
     method: "GET",
   });
+
+  console.log("data", data);
+  
   return (
     <AreaDetailPage data={data} areaId={areaId} currentPage={page}/>
   )

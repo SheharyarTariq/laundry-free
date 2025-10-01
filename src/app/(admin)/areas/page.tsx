@@ -8,10 +8,12 @@ export default async function Page(props:{ searchParams: SearchParams}) {
   const searchParams = await props.searchParams
   const page = searchParams.page || '1';
   const name = searchParams.name || '';
+
   const data = await apiRequest({
     endpoint: routes.api.getAreas(page, name),
     isProtected: true,
     method: "GET",
   });
+  
   return <Area data={data} currentPage={page }/>
 }

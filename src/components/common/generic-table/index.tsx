@@ -22,17 +22,16 @@ export type Column<T> = {
 };
 
 type GenericTableProps<T> = {
-  data: T[];
-  columns: Column<T>[];
-  keyAccessor: (row: T) => string;
-  initialOrderBy?: string;
-  onRowClick?: (row: T) => void;
-  loading?: boolean;
-  totalItems: number;
-  page?: number;
-  rowsPerPage?: number;
-  onPageChange?: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
-  onRowsPerPageChange?: (rows: number) => void;
+  readonly data: T[];
+  readonly columns: Column<T>[];
+  readonly keyAccessor: (row: T) => string;
+  readonly initialOrderBy?: string;
+  readonly onRowClick?: (row: T) => void;
+  readonly loading?: boolean;
+  readonly totalItems: number;
+  readonly page?: number;
+  readonly rowsPerPage?: number;
+  readonly onPageChange?: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
 };
 
 type Order = 'asc' | 'desc';
@@ -110,7 +109,7 @@ export default function GenericTable<T>({
             </TableHead>
             <TableBody>
               {visibleRows.map((row) => (
-                <TableRow hover key={keyAccessor(row)} sx={{ cursor: onRowClick ? 'pointer' : 'default' }} onClick={() => onRowClick && onRowClick(row)}>
+                <TableRow hover key={keyAccessor(row)} sx={{ cursor: onRowClick ? 'pointer' : 'default' }} onClick={() => onRowClick?.(row)}>
                   {columns.map((col) => (
                     <TableCell key={col.id} align={col.numeric ? 'right' : 'left'}>
                       {col.renderCell ? col.renderCell(row) : row[col.id as keyof T] as React.ReactNode}

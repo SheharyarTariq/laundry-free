@@ -27,7 +27,7 @@ export default function CategoryEdit({ id, name, description, onUpdated }: Reado
         try {
           setLoading(true);
           const response = await apiCall({
-            endpoint: routes.api.categorydetails(id, ""),
+            endpoint: routes.api.categorydetails(id),
             method: "PUT",
             isProtected: true,
             data: { name: formName, description: formDescription },

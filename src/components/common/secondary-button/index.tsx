@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import Link from 'next/link';
 import React from 'react'
 import { usePathname } from 'next/navigation';
@@ -13,7 +13,7 @@ const SecondaryButton:React.FC<SecondaryButtonProps> = ({children, route}) => {
 
   return (
     <Link href={route}>
-      <button className={`px-4 py-2 rounded-lg text-white hover:cursor-pointer ${pathname.startsWith(route) ? "bg-deep-ocean" : ""}`}>
+      <button className={`px-4 py-2 rounded-lg text-white  text-xs sm:text-sm md:text-base  hover:cursor-pointer ${pathname.startsWith(route) ? "bg-deep-ocean" : ""}`}>
         {children}
       </button>
     </Link>

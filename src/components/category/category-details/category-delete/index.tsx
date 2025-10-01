@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FormDialog from "@/components/common/form-dailog";
 import apiCall from "@/lib/utils/api-call";
 import { routes } from "@/lib/utils/routes";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -21,7 +20,7 @@ export default function CategoryDelete({ id }: Readonly<{ id: string }>) {
         try {
           setLoading(true);
           const response = await apiCall({
-            endpoint: routes.api.categorydetails(id, ""),
+            endpoint: routes.api.categorydetails(id),
             method: "DELETE",
             isProtected: true,
           });

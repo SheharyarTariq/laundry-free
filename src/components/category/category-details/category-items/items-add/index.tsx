@@ -6,8 +6,6 @@ import { routes } from "@/lib/utils/routes";
 import FormDialog from "@/components/common/form-dailog";
 import Input from "@/components/common/input";
 import AddIcon from "@mui/icons-material/Add";
-import { Switch, FormControlLabel, Box, Typography } from "@mui/material";
-import Select from "@/components/common/select";
 
 interface ItemsAddProps {
   categoryId: string;
@@ -59,7 +57,8 @@ export default function ItemsAdd({ categoryId, onItemAdded }: Readonly<ItemsAddP
       };
 
       const response = await apiCall({
-        endpoint: routes.api.postcategoryitems(categoryId),
+        // endpoint: routes.api.postcategoryitems(categoryId),
+        endpoint: routes.api.postcategoryitems,
         method: "POST",
         isProtected: true,
         data: requestData,
@@ -77,16 +76,14 @@ export default function ItemsAdd({ categoryId, onItemAdded }: Readonly<ItemsAddP
         return true;
       }
       return false;
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating item:", error);
-      console.error("Error response:", error.response?.data);
-      console.error("Error status:", error.response?.status);
       
-      if (error.response?.data?.message) {
-        toast.error(`Failed to create item: ${error.response.data.message}`);
-      } else {
+      // if (error.response?.data?.message) {
+      //   toast.error(`Failed to create item: ${error.response.data.message}`);
+      // } else {
         toast.error("Failed to create item");
-      }
+      // }
       return false;
     } finally {
       setLoading(false);

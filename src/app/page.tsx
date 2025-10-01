@@ -1,13 +1,8 @@
-"use client"
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { routes } from "@/lib/utils/routes";
-function Page() {
-    const router = useRouter();
-    useEffect(() => {
-        router.push(routes.ui.areas);
-    }, []);
-  
+import SignIn from '@/components/sign-in'
+import React from 'react'
+
+const Page = () => {
+  return <SignIn/>
 }
 
 export default Page
