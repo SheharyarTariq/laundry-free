@@ -15,11 +15,15 @@ export default async function Page(props: Readonly<{ searchParams: SearchParams}
   params.set('page', page);
   params.set('itemsPerPage', itemsPerPage);
 
-  const data = await apiRequest({
+  const response = await apiRequest({
     endpoint: `${routes.api.orders}?${params.toString()}`,
     isProtected: true,
     method: "GET",
   });
-  
-  return <Order data={data} currentPage={page} />
+  const data = response?.data;
+
+  if (!data) {
+    return <div>No order data found.</div>;
+  }
+  return <Order data={data} currentPage={page} />;
 }
