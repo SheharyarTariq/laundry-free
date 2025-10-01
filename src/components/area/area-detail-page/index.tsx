@@ -7,6 +7,7 @@ import AddPostcode from './add-postcode';
 import { routes } from '@/lib/utils/routes';
 import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
+import BackArrow from '@/components/common/arrowback';
 
 interface AreaDetailPageProps {
   areaId: string;
@@ -34,11 +35,11 @@ const AreaDetailPage:React.FC<AreaDetailPageProps> = ({data, currentPage, areaId
       <Box>
         <Box className="flex items-center gap-x-2">
           <Link href={routes.ui.areas} className="flex items-center gap-x-2 hover:cursor-pointer">
-            <ArrowLeft className="w-6 h-6 text-primary" />
+           <BackArrow/>
             <Typography>Areas</Typography>
           </Link>
         </Box>
-        <Box className="flex justify-between">
+        <Box className="flex justify-between mb-5 ml-2">
           <h1 className='text-2xl font-bold'>Areas</h1>
           <DeleteArea areaId={areaId} submitFormloading={submitFormloading} setSubmitFormLoading={setSubmitFormLoading} startTransition={startTransition}/>
         </Box>

@@ -20,7 +20,7 @@ export default function CategoryForm({ startTransition }: Readonly<CategoryFormP
   return (
     <FormDialog
       title="Create Category"
-      buttonText={<><AddIcon fontSize="small" /> Create</>}
+      buttonText={<><AddIcon fontSize="small" className="text-xs sm:text-sm" /> Create</>}
       saveButtonText="Save"
       loading={loading}
       onSubmit={async () => {
@@ -60,8 +60,14 @@ export default function CategoryForm({ startTransition }: Readonly<CategoryFormP
       }}
     >
       <div className="space-y-3">
-        <Input value={name} onChange={(e) => setName(e.target.value)} label="Name" placeholder="e.g. Trousers" required />
-        <Input value={description} onChange={(e) => setDescription(e.target.value)} label="Description" placeholder="Optional description" />
+        <Input value={name}
+          onChange={(e) => setName(e.target.value)}
+          label="Name"
+          placeholder="e.g. Trousers" required />
+        <Input value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          label="Description"
+          placeholder="Optional description" />
       </div>
     </FormDialog>
   );
