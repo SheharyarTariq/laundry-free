@@ -77,6 +77,8 @@ export default function GenericTable<T>({
   
     return rows;
   }, [data, order, orderBy]);
+
+  // Use server-provided pagination; do not slice on client
   
   return (
     <Box sx={{ width: '100%' }}>

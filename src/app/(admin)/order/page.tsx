@@ -20,7 +20,7 @@ export default async function Page(props: Readonly<{ searchParams: SearchParams}
     isProtected: true,
     method: "GET",
   });
-  const data = response?.data;
+  const data = response;
 
   if (!data) {
     return <div>No order data found.</div>;
