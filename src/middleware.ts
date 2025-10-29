@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const accessToken = request.cookies.get('accessToken')?.value
   const isAdmin = request.cookies.get('isAdmin')?.value
-
+  
   const isAuthenticated = accessToken || isAdmin
 
   if (pathname === '/' && isAuthenticated) {
@@ -17,6 +17,11 @@ export function middleware(request: NextRequest) {
   
   if (isProtectedRoute && !isAuthenticated) {
     return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  // This will log to your server's terminal console.
+  if (accessToken) {
+    console.log('Bearer Token:', accessToken);
   }
 
   return NextResponse.next()
