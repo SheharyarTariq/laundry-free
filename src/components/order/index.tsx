@@ -15,13 +15,15 @@ interface OrderProps {
 }
 
 interface OrderType {
-  id: string;
-  orderNumber: string;
-  customerName: string;
+  id: number | string;
+  number: string;
   status: string;
-  totalAmount: number;
+  revenue?: number | null;
   createdAt: string;
-  deliveryDate?: string;
+  user?: {
+    fullName?: string;
+    email?: string;
+  };
 }
 
 const Order: React.FC<OrderProps> = ({ data, currentPage }) => {
