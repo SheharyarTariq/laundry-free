@@ -44,8 +44,7 @@ export default function GenericCard({
         <div className={`grid grid-cols-1 ${gridColsClass} gap-0`}>
           {items.map((item, index) => {
             const colSpan = Math.min(Math.max(item.colSpan ?? 1, 1), columns);
-            const spanClass = colSpan === columns ? "md:col-span-" + columns : `md:col-span-${colSpan}`;
-            const isLastRow = false; // keep consistent borders for simplicity
+            const spanClass = colSpan === columns ? ("md:col-span-" + columns) : (`md:col-span-${colSpan}`);
             return (
               <div
                 key={index}
