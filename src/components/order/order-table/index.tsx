@@ -4,27 +4,33 @@ import GenericTable, { Column } from '@/components/common/generic-table';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/lib/utils/routes';
 
-interface Order {
-  id: string;
-  orderNumber: string;
-  customerName: string;
+interface OrderApiRow {
+  id: number | string;
+  number: string;
   status: string;
-  totalAmount: number;
+  revenue?: number | null;
   createdAt: string;
-  deliveryDate?: string;
+  user?: {
+    fullName?: string;
+    email?: string;
+  };
 }
 
 export default function OrderTable({ data, totalItems, loading, currentPage }: Readonly<{ 
-  data: Order[];
+  data: OrderApiRow[];
   loading: boolean;
   totalItems: number;
   currentPage: string;
 }>) {
   const router = useRouter();
 
-  const columns: Column<Order>[] = [
-    { id: 'orderNumber', label: 'Order Number' },
-    { id: 'customerName', label: 'Customer Name' },
+  const columns: Column<OrderApiRow>[] = [
+    { id: 'number', label: 'Order Number' },
+    { 
+      id: 'user', 
+      label: 'Customer Name',
+      renderCell: (row) => row.user?.fullName || row.user?.email || '-'
+    },
     { 
       id: 'status', 
       label: 'Status',
@@ -40,10 +46,10 @@ export default function OrderTable({ data, totalItems, loading, currentPage }: R
       )
     },
     { 
-      id: 'totalAmount', 
-      label: 'Total Amount',
+      id: 'revenue', 
+      label: 'Revenue',
       numeric: true,
-      renderCell: (row) => `$${row.totalAmount.toFixed(2)}`
+      renderCell: (row) => `$${Number(row.revenue ?? 0).toFixed(2)}`
     },
     { 
       id: 'createdAt', 
@@ -67,12 +73,12 @@ export default function OrderTable({ data, totalItems, loading, currentPage }: R
   };
   
   return (
-    <GenericTable<Order>
+    <GenericTable<OrderApiRow>
       loading={loading}
       data={data}
       totalItems={totalItems}
       columns={columns}
-      keyAccessor={(row) => row.id}
+      keyAccessor={(row) => String(row.id)}
       initialOrderBy="createdAt"
       page={pageIndex}
       rowsPerPage={rowsPerPage}
